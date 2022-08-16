@@ -48,12 +48,12 @@ void task1()
         uint8_t btn2State = digitalRead(button2Pin);
         uint32_t currentTime = millis();
 
-    if(btn1State != btn1StateOld || btn2State != btn2StateOld)
+    if((btn1State != btn1StateOld) || (btn2State != btn2StateOld))
     {
         btn1StateOld = btn1State;
         btn2StateOld = btn2State;
-        
         printf("btn1: %d,btn2: %d\n", btn1StateOld, btn2StateOld);
+        
         // Evento 1
         if (btn1State == LOW & btn2State == LOW)
             {
