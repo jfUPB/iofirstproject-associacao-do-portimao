@@ -11,6 +11,8 @@ void task1()
     // Definición de variables static (conservan
     // su valor entre llamadas a task1)
     static uint32_t lasTime = 0;
+    static uint8_t btn1StateOld = LOW;
+    static uint8_t btn2StateOld = LOW;
 
     // Constantes
 
@@ -46,35 +48,43 @@ void task1()
         uint8_t btn2State = digitalRead(button2Pin);
         uint32_t currentTime = millis();
 
-        // Evento 1:
-        if ((currentTime - lasTime) >= INTERVAL)
-        {
-            lasTime = currentTime;
-            printf("btn1: %d,btn2: %d\n", btn1State, btn2State);
-        }
-
-        // Evento 2
+    if(btn1State != btn1StateOld || btn2State != btn2StateOld)
+    {
+        btn1StateOld = btn1State;
+        btn2StateOld = btn2State;
+        
+        printf("btn1: %d,btn2: %d\n", btn1StateOld, btn2StateOld);
+        // Evento 1
         if (btn1State == LOW & btn2State == LOW)
+            {
             digitalWrite(ledRed, HIGH);
-            else
-            digitalWrite(ledRed, LOW);
-             
             
-        // Evento 3
+            }
+            else
+            digitalWrite(ledRed, LOW);                                        
+        // Evento 2
         if (btn1State == LOW & btn2State == HIGH)
-            digitalWrite(ledGreen, HIGH);
+            {digitalWrite(ledGreen, HIGH);
+            
+            }
             else
             digitalWrite(ledGreen, LOW);
-        // Evento 4
+        // Evento 3
         if (btn1State == HIGH & btn2State == LOW)
-            digitalWrite(ledBlue, HIGH);
+            {digitalWrite(ledBlue, HIGH);
+            
+            }
             else
             digitalWrite(ledBlue, LOW);
-        // Evento 5
+        // Evento 4
         if (btn1State == HIGH & btn2State == HIGH)
-            digitalWrite(ledYellow, HIGH);
+            {digitalWrite(ledYellow, HIGH);
+            
+            }
             else
             digitalWrite(ledYellow, LOW);
+    }
+
 
         break;
     }
